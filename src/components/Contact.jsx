@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import emailjs from '@emailjs/browser'
 import './Contact.css'
 
 function Contact() {
@@ -7,6 +8,7 @@ function Contact() {
     email: '',
     message: ''
   })
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleChange = (e) => {
     setFormData({
@@ -17,10 +19,34 @@ function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Form gönderme işlemini buraya ekleyebilirsiniz
-    console.log('Form data:', formData)
-    alert('Mesajınız gönderildi! (Bu bir demo mesajdır)')
-    setFormData({ name: '', email: '', message: '' })
+    setIsLoading(true)
+
+    // EmailJS ile e-posta gönderme
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      message: formData.message,
+      to_email: 'alimert930@gmail.com'
+    }
+
+    // EmailJS service ID, template ID ve public key'i buraya ekleyin
+    emailjs.send(
+      'YOUR_SERVICE_ID',        // EmailJS'den alacağınız Service ID
+      'YOUR_TEMPLATE_ID',       // EmailJS'den alacağınız Template ID
+      templateParams,
+      'YOUR_PUBLIC_KEY'         // EmailJS'den alacağınız Public Key
+    )
+    .then((response) => {
+      console.log('SUCCESS!', response.status, response.text)
+      alert('✅ Mesajınız başarıyla gönderildi! En kısa sürede dönüş yapacağım.')
+      setFormData({ name: '', email: '', message: '' })
+      setIsLoading(false)
+    })
+    .catch((error) => {
+      console.error('FAILED...', error)
+      alert('❌ Mesaj gönderilemedi. Lütfen doğrudan alimert930@gmail.com adresine e-posta gönderin.')
+      setIsLoading(false)
+    })
   }
 
   return (
@@ -95,8 +121,8 @@ function Contact() {
               placeholder="Mesajınızı buraya yazın..."
             ></textarea>
           </div>
-          <button type="submit" className="submit-btn">
-            Gönder
+          <button type="submit" className="submit-btn" disabled={isLoading}>
+            {isLoading ? 'Gönderiliyor...' : 'Gönder'}
           </button>
         </form>
       </div>
