@@ -26,12 +26,11 @@ function Footer() {
         </div>
         
         <div className="footer-section">
-          <h4 className="footer-heading">Sosyal Medya</h4>
+          <h4 className="footer-heading">Sosyal Medya & Blog</h4>
           <div className="social-links">
-            <a href="#" className="social-link">GitHub</a>
-            <a href="#" className="social-link">LinkedIn</a>
-            <a href="#" className="social-link">Twitter</a>
-            <a href="#" className="social-link">Instagram</a>
+            <a href="https://github.com/AliMertBOSTAN" target="_blank" rel="noopener noreferrer" className="social-link">GitHub</a>
+            <a href="https://www.linkedin.com/in/ali-mert-bostan/" target="_blank" rel="noopener noreferrer" className="social-link">LinkedIn</a>
+            <a href="https://medium.com/@BOSTANmert" target="_blank" rel="noopener noreferrer" className="social-link">📝 Medium Blog</a>
           </div>
         </div>
       </div>

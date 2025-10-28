@@ -15,6 +15,9 @@ function Hero() {
           <div className="hero-buttons">
             <a href="#projects" className="btn btn-primary">Projelerimi Gör</a>
             <a href="#contact" className="btn btn-secondary">İletişime Geç</a>
+            <a href="/CV-Ali-Mert-BOSTAN.pdf" download className="btn btn-resume">
+              📄 CV İndir
+            </a>
           </div>
         </div>
         <div className="hero-visual">

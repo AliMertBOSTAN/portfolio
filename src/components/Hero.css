@@ -92,6 +92,23 @@
   color: var(--bg-dark);
 }
 
+.btn-resume {
+  background: linear-gradient(135deg, #1a2332, #2a3647);
+  color: var(--green-primary);
+  border: 2px solid var(--green-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-resume:hover {
+  background: linear-gradient(135deg, var(--green-primary), var(--green-secondary));
+  color: var(--bg-dark);
+  border-color: var(--green-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+}
+
 .hero-visual {
   position: relative;
   display: flex;
@@ -181,6 +198,7 @@
 
   .hero-buttons {
     justify-content: center;
+    flex-wrap: wrap;
   }
 
   .glowing-circle {

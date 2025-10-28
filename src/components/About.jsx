@@ -29,6 +29,15 @@ function About() {
               <span className="stat-label">Bağlantı</span>
             </div>
           </div>
+          
+          <div className="about-actions">
+            <a href="/CV-Ali-Mert-BOSTAN.pdf" download className="about-btn">
+              📄 CV İndir
+            </a>
+            <a href="https://medium.com/@BOSTANmert" target="_blank" rel="noopener noreferrer" className="about-btn about-btn-outline">
+              📝 Medium Blog
+            </a>
+          </div>
         </div>
         <div className="about-image">
           <div className="image-placeholder">

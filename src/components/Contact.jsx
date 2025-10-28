@@ -34,25 +34,25 @@ function Contact() {
             Mesajınızı bırakın, size en kısa sürede dönüş yapayım.
           </p>
           <div className="contact-details">
-            {/* <div className="contact-item">
-              <span className="contact-icon">📧</span>
-              <div>
-                <h4>Email</h4>
-                <a href="mailto:email@example.com">email@example.com</a>
-              </div>
-            </div>
             <div className="contact-item">
-              <span className="contact-icon">📱</span>
-              <div>
-                <h4>Telefon</h4>
-                <a href="tel:+905551234567">+90 555 123 45 67</a>
-              </div>
-            </div> */}
-            <div className="contact-item">
-              <span className="contact-icon">📍</span>
+              <span className="contact-icon">�</span>
               <div>
                 <h4>Konum</h4>
                 <p>Ankara, Türkiye</p>
+              </div>
+            </div>
+            <div className="contact-item">
+              <span className="contact-icon">�</span>
+              <div>
+                <h4>Blog</h4>
+                <a href="https://medium.com/@BOSTANmert" target="_blank" rel="noopener noreferrer">Medium Blog</a>
+              </div>
+            </div>
+            <div className="contact-item">
+              <span className="contact-icon">�</span>
+              <div>
+                <h4>CV</h4>
+                <a href="/CV-Ali-Mert-BOSTAN.pdf" download>CV İndir (PDF)</a>
               </div>
             </div>
           </div>
