@@ -1,17 +1,12 @@
 name: portfolio
 region: fra
-services:
+static_sites:
   - name: web
     github:
       branch: main
       deploy_on_push: true
       repo: AliMertBOSTAN/portfolio
     build_command: npm run build
-    environment_slug: node-js
-    instance_count: 1
-    instance_size_slug: basic-xxs
-    http_port: 8080
+    output_dir: dist
     routes:
       - path: /
-    health_check:
-      http_path: /
