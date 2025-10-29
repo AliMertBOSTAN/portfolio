@@ -1,5 +1,8 @@
 .contact {
   background: var(--bg-dark);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .contact-content {
@@ -11,7 +14,7 @@
 .contact-subtitle {
   font-size: 2rem;
   margin-bottom: 20px;
-  color: var(--green-primary);
+  color: var(--blue-primary);
 }
 
 .contact-description {
@@ -32,13 +35,15 @@
   align-items: flex-start;
   padding: 20px;
   background: var(--bg-card);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-radius: 12px;
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   transition: all 0.3s ease;
 }
 
 .contact-item:hover {
-  border-color: var(--green-primary);
+  border-color: var(--blue-primary);
   transform: translateX(5px);
 }
 
@@ -53,13 +58,13 @@
 }
 
 .contact-item a {
-  color: var(--green-primary);
+  color: var(--blue-primary);
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .contact-item a:hover {
-  color: var(--green-secondary);
+  color: var(--blue-secondary);
 }
 
 .contact-item p {
@@ -89,7 +94,9 @@
 .form-group textarea {
   padding: 15px;
   background: var(--bg-card);
-  border: 1px solid var(--border-color);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   color: var(--text-primary);
   font-size: 1rem;
@@ -100,8 +107,8 @@
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--green-primary);
-  box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1);
+  border-color: var(--blue-primary);
+  box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.1);
 }
 
 .form-group textarea {
@@ -111,7 +118,7 @@
 
 .submit-btn {
   padding: 15px 40px;
-  background: linear-gradient(135deg, var(--green-primary), var(--green-secondary));
+  background: linear-gradient(135deg, var(--blue-primary), var(--blue-secondary));
   color: var(--bg-dark);
   border: none;
   border-radius: 8px;
@@ -119,12 +126,12 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 119, 255, 0.3);
 }
 
 .submit-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 255, 136, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 119, 255, 0.4);
 }
 
 .submit-btn:active:not(:disabled) {

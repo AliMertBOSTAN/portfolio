@@ -14,7 +14,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 30% 50%, rgba(0, 255, 136, 0.1) 0%, transparent 50%);
+  background: radial-gradient(circle at 30% 50%, rgba(0, 119, 255, 0.1) 0%, transparent 50%);
   pointer-events: none;
 }
 
@@ -27,7 +27,7 @@
 }
 
 .hero-greeting {
-  color: var(--green-primary);
+  color: var(--blue-primary);
   font-size: 1.2rem;
   font-weight: 500;
   display: block;
@@ -37,7 +37,7 @@
 .hero-name {
   font-size: 4rem;
   margin-bottom: 10px;
-  background: linear-gradient(135deg, var(--text-primary), var(--green-primary));
+  background: linear-gradient(135deg, var(--text-primary), var(--blue-primary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -71,42 +71,42 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--green-primary), var(--green-secondary));
-  color: var(--bg-dark);
-  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+  background: linear-gradient(135deg, var(--blue-primary), var(--blue-secondary));
+  color: var(--text-primary);
+  box-shadow: 0 4px 15px rgba(0, 119, 255, 0.3);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 255, 136, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 119, 255, 0.4);
 }
 
 .btn-secondary {
   background: transparent;
-  color: var(--green-primary);
-  border: 2px solid var(--green-primary);
+  color: var(--text-primary);
+  border: 2px solid var(--blue-primary);
 }
 
 .btn-secondary:hover {
-  background: var(--green-primary);
+  background: var(--blue-primary);
   color: var(--bg-dark);
 }
 
 .btn-resume {
   background: linear-gradient(135deg, #1a2332, #2a3647);
-  color: var(--green-primary);
-  border: 2px solid var(--green-primary);
+  color: var(--blue-primary);
+  border: 2px solid var(--blue-primary);
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
 .btn-resume:hover {
-  background: linear-gradient(135deg, var(--green-primary), var(--green-secondary));
+  background: linear-gradient(135deg, var(--blue-primary), var(--blue-secondary));
   color: var(--bg-dark);
-  border-color: var(--green-primary);
+  border-color: var(--blue-primary);
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 119, 255, 0.3);
 }
 
 .hero-visual {
@@ -120,7 +120,7 @@
   width: 400px;
   height: 400px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 255, 136, 0.2) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(0, 119, 255, 0.2) 0%, transparent 70%);
   position: absolute;
   animation: pulse 4s ease-in-out infinite;
 }
@@ -138,9 +138,11 @@
 
 .code-snippet {
   background: var(--bg-card);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   padding: 30px;
   border-radius: 15px;
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   font-family: 'Courier New', monospace;
   font-size: 1rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -170,7 +172,7 @@
 }
 
 .code-string {
-  color: var(--green-primary);
+  color: var(--blue-primary);
 }
 
 .code-bracket {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import emailjs from '@emailjs/browser'
+import { FaMapMarkerAlt, FaLinkedin, FaFileDownload } from 'react-icons/fa'
 import './Contact.css'
 
 function Contact() {
@@ -61,21 +62,21 @@ function Contact() {
           </p>
           <div className="contact-details">
             <div className="contact-item">
-              <span className="contact-icon">�</span>
+              <span className="contact-icon"><FaMapMarkerAlt /></span>
               <div>
                 <h4>Konum</h4>
                 <p>Ankara, Türkiye</p>
               </div>
             </div>
             <div className="contact-item">
-              <span className="contact-icon">�</span>
+              <span className="contact-icon"><FaLinkedin /></span>
               <div>
-                <h4>Blog</h4>
-                <a href="https://medium.com/@BOSTANmert" target="_blank" rel="noopener noreferrer">Medium Blog</a>
+                <h4>LinkedIn</h4>
+                <a href="https://www.linkedin.com/in/ali-mert-bostan/" target="_blank" rel="noopener noreferrer">LinkedIn Profilim</a>
               </div>
             </div>
             <div className="contact-item">
-              <span className="contact-icon">�</span>
+              <span className="contact-icon"><FaFileDownload /></span>
               <div>
                 <h4>CV</h4>
                 <a href="/CV-Ali-Mert-BOSTAN.pdf" download>CV İndir (PDF)</a>

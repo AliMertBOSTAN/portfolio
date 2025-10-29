@@ -5,23 +5,58 @@
 }
 
 :root {
-  --bg-dark: #0a0e1a;
-  --bg-secondary: #131827;
-  --bg-card: #1a2332;
-  --green-primary: #7ce6f2;
-  --green-secondary: #7ce6f2;
-  --green-dark: #7ce6f2;
-  --text-primary: #e0e6ed;
-  --text-secondary: #a8b2c1;
-  --border-color: #2a3647;
+  /* Yeni mavi tonlarda renk paleti - BG.png'den esinlenildi */
+  --bg-dark: rgba(0, 8, 20, 0.3);
+  --bg-secondary: rgba(0, 29, 61, 0.25);
+  --bg-card: rgba(0, 53, 102, 0.2);
+  --blue-primary: #0077ff;
+  --blue-secondary: #005ec4;
+  --blue-dark: #003d82;
+  --text-primary: #e8f1ff;
+  --text-secondary: #94b3d4;
+  --border-color: rgba(26, 77, 122, 0.4);
+  --accent-glow: rgba(0, 119, 255, 0.5);
+  
+  /* Glass-morphism efektleri */
+  --glass-bg: rgba(0, 20, 40, 0.15);
+  --glass-border: rgba(0, 119, 255, 0.3);
+  --glass-blur: blur(25px);
 }
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--bg-dark);
+  background-image: url('/BG.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 8, 20, 0.85) 0%,
+    rgba(0, 29, 61, 0.75) 50%,
+    rgba(0, 8, 20, 0.85) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
 }
 
 html {
@@ -37,10 +72,10 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--green-dark);
+  background: var(--blue-dark);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--green-secondary);
+  background: var(--blue-secondary);
 }

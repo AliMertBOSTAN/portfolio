@@ -1,9 +1,10 @@
 .App {
   min-height: 100vh;
+  padding-bottom: 40px; /* Bottom nav için küçültülmüş alan */
 }
 
 main {
-  padding-top: 80px;
+  padding-top: 0; /* Header kaldırıldığı için padding yok */
 }
 
 section {
@@ -25,7 +26,7 @@ section {
   display: block;
   width: 100px;
   height: 4px;
-  background: linear-gradient(90deg, var(--green-primary), var(--green-secondary));
+  background: linear-gradient(90deg, var(--blue-primary), var(--blue-secondary));
   margin: 20px auto 0;
   border-radius: 2px;
 }

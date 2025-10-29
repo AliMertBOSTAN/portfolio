@@ -1,5 +1,8 @@
 .about {
-  background: var(--bg-secondary);
+  background: var(--bg-dark);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .about-content {
@@ -41,14 +44,14 @@
 
 .stat-item:hover {
   transform: translateY(-5px);
-  border-color: var(--green-primary);
-  box-shadow: 0 5px 20px rgba(0, 255, 136, 0.2);
+  border-color: var(--blue-primary);
+  box-shadow: 0 5px 20px rgba(0, 119, 255, 0.2);
 }
 
 .stat-number {
   font-size: 2.5rem;
   font-weight: bold;
-  color: var(--green-primary);
+  color: var(--blue-primary);
   margin-bottom: 5px;
 }
 
@@ -74,28 +77,28 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, var(--green-primary), var(--green-secondary));
+  background: linear-gradient(135deg, var(--blue-primary), var(--blue-secondary));
   color: var(--bg-dark);
   border: 2px solid transparent;
-  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 119, 255, 0.3);
 }
 
 .about-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 255, 136, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 119, 255, 0.4);
 }
 
 .about-btn-outline {
   background: transparent;
-  color: var(--green-primary);
-  border: 2px solid var(--green-primary);
+  color: var(--blue-primary);
+  border: 2px solid var(--blue-primary);
   box-shadow: none;
 }
 
 .about-btn-outline:hover {
-  background: var(--green-primary);
+  background: var(--blue-primary);
   color: var(--bg-dark);
-  border-color: var(--green-primary);
+  border-color: var(--blue-primary);
 }
 
 .about-image {
@@ -112,8 +115,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid var(--green-primary);
-  box-shadow: 0 10px 40px rgba(0, 255, 136, 0.2);
+  border: 2px solid var(--blue-primary);
+  box-shadow: 0 10px 40px rgba(0, 119, 255, 0.2);
   position: relative;
   overflow: hidden;
 }
@@ -128,7 +131,7 @@
   background: linear-gradient(
     45deg,
     transparent,
-    rgba(0, 255, 136, 0.1),
+    rgba(0, 119, 255, 0.1),
     transparent
   );
   transform: rotate(45deg);
