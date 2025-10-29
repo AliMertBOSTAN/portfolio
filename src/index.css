@@ -5,7 +5,7 @@
 }
 
 :root {
-  /* Yeni mavi tonlarda renk paleti - BG.png'den esinlenildi */
+  /* Koyu tema renkleri - BG.png'den esinlenildi */
   --bg-dark: rgba(0, 8, 20, 0.3);
   --bg-secondary: rgba(0, 29, 61, 0.25);
   --bg-card: rgba(0, 53, 102, 0.2);
@@ -23,18 +23,66 @@
   --glass-blur: blur(25px);
 }
 
+/* Açık Tema */
+body.light-theme {
+  --bg-dark: rgba(255, 255, 255, 0.4);
+  --bg-secondary: rgba(240, 248, 255, 0.5);
+  --bg-card: rgba(230, 242, 255, 0.3);
+  --blue-primary: #0066cc;
+  --blue-secondary: #004d99;
+  --blue-dark: #003366;
+  --text-primary: #1a1a2e;
+  --text-secondary: #4a5568;
+  --border-color: rgba(0, 102, 204, 0.3);
+  --accent-glow: rgba(0, 102, 204, 0.4);
+  
+  --glass-bg: rgba(255, 255, 255, 0.2);
+  --glass-border: rgba(0, 102, 204, 0.3);
+}
+
+/* Koyu Tema (default) */
+body.dark-theme {
+  --bg-dark: rgba(0, 8, 20, 0.3);
+  --bg-secondary: rgba(0, 29, 61, 0.25);
+  --bg-card: rgba(0, 53, 102, 0.2);
+  --blue-primary: #0077ff;
+  --blue-secondary: #005ec4;
+  --blue-dark: #003d82;
+  --text-primary: #e8f1ff;
+  --text-secondary: #94b3d4;
+  --border-color: rgba(26, 77, 122, 0.4);
+  --accent-glow: rgba(0, 119, 255, 0.5);
+  
+  --glass-bg: rgba(0, 20, 40, 0.15);
+  --glass-border: rgba(0, 119, 255, 0.3);
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--bg-dark);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Koyu Tema Arka Planı */
+body.dark-theme {
   background-image: url('/BG.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
-  color: var(--text-primary);
-  line-height: 1.6;
-  overflow-x: hidden;
-  position: relative;
+}
+
+/* Açık Tema Arka Planı */
+body.light-theme {
+  background-image: url('/BGW.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 body::before {
@@ -44,14 +92,29 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  transition: background 0.3s ease;
+}
+
+/* Koyu Tema Overlay */
+body.dark-theme::before {
   background: linear-gradient(
     135deg,
     rgba(0, 8, 20, 0.85) 0%,
     rgba(0, 29, 61, 0.75) 50%,
     rgba(0, 8, 20, 0.85) 100%
   );
-  pointer-events: none;
-  z-index: 0;
+}
+
+/* Açık Tema Overlay */
+body.light-theme::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(240, 248, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.4) 100%
+  );
 }
 
 body > * {

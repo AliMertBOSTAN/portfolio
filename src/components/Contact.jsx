@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import emailjs from '@emailjs/browser'
 import { FaMapMarkerAlt, FaLinkedin, FaFileDownload } from 'react-icons/fa'
+import { useLanguage } from '../contexts/LanguageContext'
 import './Contact.css'
 
 function Contact() {
+  const { t } = useLanguage()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -52,34 +54,33 @@ function Contact() {
 
   return (
     <section id="contact" className="contact">
-      <h2 className="section-title">İletişim</h2>
+      <h2 className="section-title">{t('contactTitle')}</h2>
       <div className="contact-content">
         <div className="contact-info">
-          <h3 className="contact-subtitle">Benimle İletişime Geçin</h3>
+          <h3 className="contact-subtitle">{t('contactSubtitle')}</h3>
           <p className="contact-description">
-            Bir proje fikriniz mi var veya birlikte çalışmak mı istiyorsunuz? 
-            Mesajınızı bırakın, size en kısa sürede dönüş yapayım.
+            {t('contactDescription')}
           </p>
           <div className="contact-details">
             <div className="contact-item">
               <span className="contact-icon"><FaMapMarkerAlt /></span>
               <div>
-                <h4>Konum</h4>
-                <p>Ankara, Türkiye</p>
+                <h4>{t('location')}</h4>
+                <p>{t('locationText')}</p>
               </div>
             </div>
             <div className="contact-item">
               <span className="contact-icon"><FaLinkedin /></span>
               <div>
-                <h4>LinkedIn</h4>
-                <a href="https://www.linkedin.com/in/ali-mert-bostan/" target="_blank" rel="noopener noreferrer">LinkedIn Profilim</a>
+                <h4>{t('linkedin')}</h4>
+                <a href="https://www.linkedin.com/in/ali-mert-bostan/" target="_blank" rel="noopener noreferrer">{t('linkedinText')}</a>
               </div>
             </div>
             <div className="contact-item">
               <span className="contact-icon"><FaFileDownload /></span>
               <div>
-                <h4>CV</h4>
-                <a href="/CV-Ali-Mert-BOSTAN.pdf" download>CV İndir (PDF)</a>
+                <h4>{t('cv')}</h4>
+                <a href="/CV-Ali-Mert-BOSTAN.pdf" download>{t('cvText')}</a>
               </div>
             </div>
           </div>
@@ -87,7 +88,7 @@ function Contact() {
         
         <form className="contact-form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="name">Adınız</label>
+            <label htmlFor="name">{t('nameLabel')}</label>
             <input
               type="text"
               id="name"
@@ -95,11 +96,11 @@ function Contact() {
               value={formData.name}
               onChange={handleChange}
               required
-              placeholder="Adınızı girin"
+              placeholder={t('namePlaceholder')}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">{t('emailLabel')}</label>
             <input
               type="email"
               id="email"
@@ -107,11 +108,11 @@ function Contact() {
               value={formData.email}
               onChange={handleChange}
               required
-              placeholder="email@example.com"
+              placeholder={t('emailPlaceholder')}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="message">Mesajınız</label>
+            <label htmlFor="message">{t('messageLabel')}</label>
             <textarea
               id="message"
               name="message"
@@ -119,11 +120,11 @@ function Contact() {
               onChange={handleChange}
               required
               rows="5"
-              placeholder="Mesajınızı buraya yazın..."
+              placeholder={t('messagePlaceholder')}
             ></textarea>
           </div>
           <button type="submit" className="submit-btn" disabled={isLoading}>
-            {isLoading ? 'Gönderiliyor...' : 'Gönder'}
+            {isLoading ? t('sending') : t('sendButton')}
           </button>
         </form>
       </div>

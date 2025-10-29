@@ -88,4 +88,97 @@
   .nav-icon {
     font-size: 1.1rem;
   }
+
+  .settings-dropdown {
+    bottom: 70px;
+    padding: 15px;
+  }
+
+  .settings-title {
+    font-size: 0.9rem;
+  }
+
+  .settings-option {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+}
+
+/* Settings Dropdown */
+.settings-dropdown {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 20, 40, 0.2);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 
+              0 0 20px rgba(0, 119, 255, 0.15);
+  min-width: 250px;
+  animation: slideUp 0.3s ease-out;
+  z-index: 998;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.settings-section {
+  margin-bottom: 15px;
+}
+
+.settings-section:last-child {
+  margin-bottom: 0;
+}
+
+.settings-title {
+  color: var(--blue-primary);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.settings-options {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.settings-option {
+  background: rgba(0, 53, 102, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 10px 15px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  flex: 1;
+  text-align: center;
+}
+
+.settings-option:hover {
+  background: rgba(0, 119, 255, 0.2);
+  border-color: var(--blue-primary);
+  color: var(--blue-primary);
+  transform: translateY(-2px);
+}
+
+.settings-option.active {
+  background: linear-gradient(135deg, rgba(0, 119, 255, 0.3), rgba(0, 94, 196, 0.3));
+  border-color: var(--blue-primary);
+  color: var(--text-primary);
+  box-shadow: 0 0 15px rgba(0, 119, 255, 0.3);
 }

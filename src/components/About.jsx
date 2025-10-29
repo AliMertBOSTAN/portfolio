@@ -1,41 +1,42 @@
 import React from 'react'
+import { useLanguage } from '../contexts/LanguageContext'
 import './About.css'
 
 function About() {
+  const { t } = useLanguage()
+  
   return (
     <section id="about" className="about">
-      <h2 className="section-title">Hakkımda</h2>
+      <h2 className="section-title">{t('aboutTitle')}</h2>
       <div className="about-content">
         <div className="about-text">
           <p className="about-paragraph">
-            Merhaba! Ben Ali Mert BOSTAN, tutkulu bir yazılım geliştiriciyim. 
-            Modern web teknolojileriyle kullanıcı deneyimini ön planda tutan 
-            projeler geliştiriyorum.
+            {t('aboutParagraph1')}
           </p>
           <p className="about-paragraph">
-            Yazılım alanında özellikle blokzincir teknolojileri, akıllı sözleşmeler (Solidity), DeFi protokolleri ve ön yüz geliştirme (React, TypeScript) üzerine çalışıyorum. Hem akademik hem girişimsel projelerde yer alarak Web3, yapay zekâ, gömülü sistemler ve oyun teknolojilerini bir araya getiren yenilikçi çözümler geliştiriyorum. Kod yazarken sadece teknik doğruluğa değil, aynı zamanda tasarım, kullanıcı deneyimi ve güvenlik prensiplerine de önem veriyorum. Hedefim, mühendislik bilgisini gerçek dünyadaki sorunlara akıllı, ölçeklenebilir ve sürdürülebilir teknolojilerle dönüştürmek.
+            {t('aboutParagraph2')}
           </p>
           <div className="about-stats">
             <div className="stat-item">
               <span className="stat-number">3+</span>
-              <span className="stat-label">Yıl Deneyim</span>
+              <span className="stat-label">{t('yearsExperience')}</span>
             </div>
             <div className="stat-item">
               <span className="stat-number">5</span>
-              <span className="stat-label">Tamamlanan Proje</span>
+              <span className="stat-label">{t('completedProjects')}</span>
             </div>
             <div className="stat-item">
               <span className="stat-number">20+</span>
-              <span className="stat-label">Bağlantı</span>
+              <span className="stat-label">{t('connections')}</span>
             </div>
           </div>
           
           <div className="about-actions">
             <a href="/CV-Ali-Mert-BOSTAN.pdf" download className="about-btn">
-              📄 CV İndir
+              📄 {t('downloadCV')}
             </a>
             <a href="https://medium.com/@BOSTANmert" target="_blank" rel="noopener noreferrer" className="about-btn about-btn-outline">
-              📝 Medium Blog
+              📝 {t('medium')}
             </a>
           </div>
         </div>

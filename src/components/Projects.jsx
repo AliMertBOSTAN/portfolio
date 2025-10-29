@@ -1,7 +1,9 @@
 import React from 'react'
+import { useLanguage } from '../contexts/LanguageContext'
 import './Projects.css'
 
 function Projects() {
+  const { t } = useLanguage()
   const projects = [
     {
       title: 'Tubitak Projesi',
@@ -19,7 +21,7 @@ function Projects() {
 
   return (
     <section id="projects" className="projects">
-      <h2 className="section-title">Projeler</h2>
+      <h2 className="section-title">{t('projectsTitle')}</h2>
       <div className="projects-grid">
         {projects.map((project, index) => (
           <div key={index} className="project-card">

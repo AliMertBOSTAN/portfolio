@@ -1,7 +1,9 @@
 import React from 'react'
+import { useLanguage } from '../contexts/LanguageContext'
 import './Skills.css'
 
 function Skills() {
+  const { t } = useLanguage()
   const skills = [
     { name: 'React', level: 85 },
     { name: 'JavaScript', level: 85 },
@@ -18,7 +20,7 @@ function Skills() {
 
   return (
     <section id="skills" className="skills">
-      <h2 className="section-title">Yetenekler</h2>
+      <h2 className="section-title">{t('skillsTitle')}</h2>
       <div className="skills-grid">
         {skills.map((skill, index) => (
           <div key={index} className="skill-card">

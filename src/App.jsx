@@ -1,5 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { ThemeProvider } from './contexts/ThemeContext'
+import { LanguageProvider } from './contexts/LanguageContext'
 import Hero from './components/Hero'
 import About from './components/About'
 import Skills from './components/Skills'
@@ -24,18 +26,22 @@ function HomePage() {
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <main>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/blog" element={<Blog />} />
-          </Routes>
-        </main>
-        <Footer />
-        <BottomNav />
-      </div>
-    </Router>
+    <ThemeProvider>
+      <LanguageProvider>
+        <Router>
+          <div className="App">
+            <main>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/blog" element={<Blog />} />
+              </Routes>
+            </main>
+            <Footer />
+            <BottomNav />
+          </div>
+        </Router>
+      </LanguageProvider>
+    </ThemeProvider>
   )
 }
 

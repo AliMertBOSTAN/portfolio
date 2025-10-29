@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import { useLanguage } from '../contexts/LanguageContext'
 import './Blog.css'
 
 function Blog() {
+  const { t, language } = useLanguage()
   const [articles, setArticles] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -43,17 +45,18 @@ function Blog() {
 
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' }
-    return new Date(dateString).toLocaleDateString('tr-TR', options)
+    const locale = language === 'tr' ? 'tr-TR' : 'en-US'
+    return new Date(dateString).toLocaleDateString(locale, options)
   }
 
   if (loading) {
     return (
       <section className="blog">
         <div className="blog-container">
-          <h1 className="blog-title">Blog Yazılarım</h1>
+          <h1 className="blog-title">{t('blogTitle')}</h1>
           <div className="loading-spinner">
             <div className="spinner"></div>
-            <p>Makaleler yükleniyor...</p>
+            <p>{t('loading')}</p>
           </div>
         </div>
       </section>
@@ -64,9 +67,9 @@ function Blog() {
     <section className="blog">
       <div className="blog-container">
         <div className="blog-header">
-          <h1 className="blog-title">Blog Yazılarım</h1>
+          <h1 className="blog-title">{t('blogTitle')}</h1>
           <p className="blog-subtitle">
-            Teknoloji, yazılım geliştirme ve blockchain üzerine düşüncelerim
+            {t('blogSubtitle')}
           </p>
           <a 
             href="https://medium.com/@BOSTANmert" 
@@ -74,7 +77,7 @@ function Blog() {
             rel="noopener noreferrer"
             className="medium-link"
           >
-            📝 Medium'da Takip Et
+            📝 {t('visitMedium')}
           </a>
         </div>
 
@@ -108,7 +111,7 @@ function Blog() {
                     rel="noopener noreferrer"
                     className="read-more-btn"
                   >
-                    Devamını Oku →
+                    {t('readMore')} →
                   </a>
                 </div>
               </article>
