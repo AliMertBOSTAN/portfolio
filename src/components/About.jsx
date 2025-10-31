@@ -1,4 +1,5 @@
 import React from 'react'
+import { FaFileAlt, FaPenNib, FaCode } from 'react-icons/fa'
 import { useLanguage } from '../contexts/LanguageContext'
 import './About.css'
 
@@ -32,17 +33,17 @@ function About() {
           </div>
           
           <div className="about-actions">
-            <a href="/CV-Ali-Mert-BOSTAN.pdf" download className="about-btn">
-              📄 {t('downloadCV')}
+            <a href="/CV-Ali-Mert-BOSTAN.pdf" target="_blank" rel="noopener noreferrer" className="about-btn">
+              <FaFileAlt /> {t('downloadCV')}
             </a>
             <a href="https://medium.com/@BOSTANmert" target="_blank" rel="noopener noreferrer" className="about-btn about-btn-outline">
-              📝 {t('medium')}
+              <FaPenNib /> {t('medium')}
             </a>
           </div>
         </div>
         <div className="about-image">
           <div className="image-placeholder">
-            <div className="image-icon">👨‍💻</div>
+            <div className="image-icon"><FaCode style={{ fontSize: '5rem' }} /></div>
           </div>
         </div>
       </div>

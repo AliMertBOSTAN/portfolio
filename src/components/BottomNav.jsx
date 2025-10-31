@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { FaHome, FaScroll, FaCog } from 'react-icons/fa'
+import { FaHome, FaScroll, FaCog, FaMoon, FaSun, FaGlobe } from 'react-icons/fa'
 import { useTheme } from '../contexts/ThemeContext'
 import { useLanguage } from '../contexts/LanguageContext'
 import './BottomNav.css'
@@ -41,13 +41,13 @@ function BottomNav() {
                 className={`settings-option ${theme === 'dark' ? 'active' : ''}`}
                 onClick={() => handleThemeChange('dark')}
               >
-                🌙 {t('dark')}
+                <FaMoon /> {t('dark')}
               </button>
               <button 
                 className={`settings-option ${theme === 'light' ? 'active' : ''}`}
                 onClick={() => handleThemeChange('light')}
               >
-                ☀️ {t('light')}
+                <FaSun /> {t('light')}
               </button>
             </div>
           </div>

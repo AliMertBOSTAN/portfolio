@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import emailjs from '@emailjs/browser'
-import { FaMapMarkerAlt, FaLinkedin, FaFileDownload } from 'react-icons/fa'
+import { FaMapMarkerAlt, FaLinkedin, FaFileAlt } from 'react-icons/fa'
 import { useLanguage } from '../contexts/LanguageContext'
 import './Contact.css'
 
@@ -77,10 +77,10 @@ function Contact() {
               </div>
             </div>
             <div className="contact-item">
-              <span className="contact-icon"><FaFileDownload /></span>
+              <span className="contact-icon"><FaFileAlt /></span>
               <div>
                 <h4>{t('cv')}</h4>
-                <a href="/CV-Ali-Mert-BOSTAN.pdf" download>{t('cvText')}</a>
+                <a href="/CV-Ali-Mert-BOSTAN.pdf" target="_blank" rel="noopener noreferrer">{t('cvText')}</a>
               </div>
             </div>
           </div>

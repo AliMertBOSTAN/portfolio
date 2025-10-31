@@ -167,6 +167,10 @@
   transition: all 0.3s ease;
   flex: 1;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
 .settings-option:hover {

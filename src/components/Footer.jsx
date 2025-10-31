@@ -1,4 +1,5 @@
 import React from 'react'
+import { FaPenNib } from 'react-icons/fa'
 import { useLanguage } from '../contexts/LanguageContext'
 import './Footer.css'
 
@@ -32,7 +33,7 @@ function Footer() {
           <div className="social-links">
             <a href="https://github.com/AliMertBOSTAN" target="_blank" rel="noopener noreferrer" className="social-link">{t('github')}</a>
             <a href="https://www.linkedin.com/in/ali-mert-bostan/" target="_blank" rel="noopener noreferrer" className="social-link">LinkedIn</a>
-            <a href="https://medium.com/@BOSTANmert" target="_blank" rel="noopener noreferrer" className="social-link">📝 {t('medium')}</a>
+            <a href="https://medium.com/@BOSTANmert" target="_blank" rel="noopener noreferrer" className="social-link"><FaPenNib /> {t('medium')}</a>
           </div>
         </div>
       </div>

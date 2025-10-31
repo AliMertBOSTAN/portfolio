@@ -1,4 +1,5 @@
 import React from 'react'
+import { FaFileAlt } from 'react-icons/fa'
 import { useLanguage } from '../contexts/LanguageContext'
 import './Hero.css'
 
@@ -18,8 +19,8 @@ function Hero() {
           <div className="hero-buttons">
             <a href="#projects" className="btn btn-primary">{t('viewProjects')}</a>
             <a href="#contact" className="btn btn-secondary">{t('contactMe')}</a>
-            <a href="/CV-Ali-Mert-BOSTAN.pdf" download className="btn btn-resume">
-              📄 {t('downloadCV')}
+            <a href="/CV-Ali-Mert-BOSTAN.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-resume">
+              <FaFileAlt /> {t('downloadCV')}
             </a>
           </div>
         </div>

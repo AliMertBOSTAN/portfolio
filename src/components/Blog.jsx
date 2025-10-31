@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { FaPenNib } from 'react-icons/fa'
 import { useLanguage } from '../contexts/LanguageContext'
 import './Blog.css'
 
@@ -77,7 +78,7 @@ function Blog() {
             rel="noopener noreferrer"
             className="medium-link"
           >
-            📝 {t('visitMedium')}
+            <FaPenNib /> {t('visitMedium')}
           </a>
         </div>
 
