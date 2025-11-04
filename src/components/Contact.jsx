@@ -80,7 +80,7 @@ function Contact() {
               <span className="contact-icon"><FaFileAlt /></span>
               <div>
                 <h4>{t('cv')}</h4>
-                <a href="/CV-Ali-Mert-BOSTAN.pdf" target="_blank" rel="noopener noreferrer">{t('cvText')}</a>
+                <a href="/AliMertBOSTAN_Resume.pdf" target="_blank" rel="noopener noreferrer">{t('cvText')}</a>
               </div>
             </div>
           </div>

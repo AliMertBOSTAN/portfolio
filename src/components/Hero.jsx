@@ -19,7 +19,7 @@ function Hero() {
           <div className="hero-buttons">
             <a href="#projects" className="btn btn-primary">{t('viewProjects')}</a>
             <a href="#contact" className="btn btn-secondary">{t('contactMe')}</a>
-            <a href="/CV-Ali-Mert-BOSTAN.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-resume">
+            <a href="/AliMertBOSTAN_Resume.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-resume">
               <FaFileAlt /> {t('downloadCV')}
             </a>
           </div>

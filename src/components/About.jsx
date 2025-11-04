@@ -33,7 +33,7 @@ function About() {
           </div>
           
           <div className="about-actions">
-            <a href="/CV-Ali-Mert-BOSTAN.pdf" target="_blank" rel="noopener noreferrer" className="about-btn">
+            <a href="/AliMertBOSTAN_Resume.pdf" target="_blank" rel="noopener noreferrer" className="about-btn">
               <FaFileAlt /> {t('downloadCV')}
             </a>
             <a href="https://medium.com/@BOSTANmert" target="_blank" rel="noopener noreferrer" className="about-btn about-btn-outline">
