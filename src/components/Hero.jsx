@@ -118,7 +118,7 @@ function Hero() {
             </div>
             <div className="code-line indent">
               <span className="code-property">passion</span>:{' '}
-              <span className="code-string">'Building the future'</span>
+              <span className="code-string">'Building Web3'</span>
             </div>
             <div className="code-line">{'}'}</div>
           </div>

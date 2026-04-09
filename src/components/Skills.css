@@ -29,7 +29,12 @@
   left: 0;
   right: 0;
   height: 100%;
-  background: radial-gradient(ellipse at top left, color-mix(in srgb, var(--cat-color, var(--blue-primary)) 10%, transparent), transparent 60%);
+  /* Subtle radial tint using the category accent color */
+  background: radial-gradient(
+    ellipse at top left,
+    color-mix(in srgb, var(--cat-color, var(--blue-primary)) 10%, transparent),
+    transparent 60%
+  );
   pointer-events: none;
 }
 
@@ -71,10 +76,12 @@
 }
 
 .skill-badge:hover {
+  /* Tint background with the category accent color */
   background: color-mix(in srgb, var(--cat-color, var(--blue-primary)) 15%, transparent);
   border-color: var(--cat-color, var(--blue-primary));
   color: var(--cat-color, var(--blue-primary));
   transform: translateY(-2px);
+  /* Subtle colored drop-shadow */
   box-shadow: 0 4px 12px color-mix(in srgb, var(--cat-color, var(--blue-primary)) 25%, transparent);
 }
 

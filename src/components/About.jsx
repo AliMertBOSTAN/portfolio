@@ -51,7 +51,7 @@ function About() {
             </div>
             <div className="profile-info">
               <h3 className="profile-name">Ali Mert BOSTAN</h3>
-              <p className="profile-role">Full Stack &amp; Blockchain Dev</p>
+              <p className="profile-role">Full Stack &amp; Blockchain Developer</p>
               <div className="profile-tags">
                 <span className="profile-tag">Web3</span>
                 <span className="profile-tag">DeFi</span>
