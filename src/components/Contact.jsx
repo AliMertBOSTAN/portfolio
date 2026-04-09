@@ -1,11 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import emailjs from '@emailjs/browser'
 import { FaMapMarkerAlt, FaLinkedin, FaFileAlt } from 'react-icons/fa'
 import { useLanguage } from '../contexts/LanguageContext'
+import useScrollReveal from '../hooks/useScrollReveal'
 import './Contact.css'
 
 function Contact() {
   const { t } = useLanguage()
+  const sectionRef = useRef(null)
+  useScrollReveal(sectionRef, [])
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -53,10 +57,10 @@ function Contact() {
   }
 
   return (
-    <section id="contact" className="contact">
-      <h2 className="section-title">{t('contactTitle')}</h2>
+    <section id="contact" className="contact" ref={sectionRef}>
+      <h2 className="section-title reveal">{t('contactTitle')}</h2>
       <div className="contact-content">
-        <div className="contact-info">
+        <div className="contact-info reveal-left">
           <h3 className="contact-subtitle">{t('contactSubtitle')}</h3>
           <p className="contact-description">
             {t('contactDescription')}
@@ -86,7 +90,7 @@ function Contact() {
           </div>
         </div>
         
-        <form className="contact-form" onSubmit={handleSubmit}>
+        <form className="contact-form reveal-right" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="name">{t('nameLabel')}</label>
             <input

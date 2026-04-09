@@ -1,16 +1,19 @@
-import React from 'react'
-import { FaFileAlt, FaPenNib, FaCode } from 'react-icons/fa'
+import React, { useRef } from 'react'
+import { FaFileAlt, FaPenNib, FaUser } from 'react-icons/fa'
 import { useLanguage } from '../contexts/LanguageContext'
+import useScrollReveal from '../hooks/useScrollReveal'
 import './About.css'
 
 function About() {
   const { t } = useLanguage()
+  const sectionRef = useRef(null)
+  useScrollReveal(sectionRef, [])
   
   return (
-    <section id="about" className="about">
-      <h2 className="section-title">{t('aboutTitle')}</h2>
+    <section id="about" className="about" ref={sectionRef}>
+      <h2 className="section-title reveal">{t('aboutTitle')}</h2>
       <div className="about-content">
-        <div className="about-text">
+        <div className="about-text reveal-left">
           <p className="about-paragraph">
             {t('aboutParagraph1')}
           </p>
@@ -41,9 +44,21 @@ function About() {
             </a>
           </div>
         </div>
-        <div className="about-image">
-          <div className="image-placeholder">
-            <div className="image-icon"><FaCode style={{ fontSize: '5rem' }} /></div>
+        <div className="about-image reveal-right">
+          <div className="profile-card">
+            <div className="profile-avatar">
+              <FaUser className="avatar-icon" />
+            </div>
+            <div className="profile-info">
+              <h3 className="profile-name">Ali Mert BOSTAN</h3>
+              <p className="profile-role">Full Stack &amp; Blockchain Developer</p>
+              <div className="profile-tags">
+                <span className="profile-tag">Web3</span>
+                <span className="profile-tag">DeFi</span>
+                <span className="profile-tag">React</span>
+                <span className="profile-tag">Solidity</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

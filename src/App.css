@@ -1,42 +1,46 @@
 .App {
   min-height: 100vh;
-  padding-bottom: 40px; /* Bottom nav için küçültülmüş alan */
+  padding-bottom: 40px;
 }
 
 main {
-  padding-top: 0; /* Header kaldırıldığı için padding yok */
+  padding-top: 0;
 }
 
 section {
-  padding: 80px 20px;
+  padding: 90px 20px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .section-title {
-  font-size: 2.5rem;
-  margin-bottom: 50px;
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 56px;
   text-align: center;
   position: relative;
   color: var(--text-primary);
+  letter-spacing: -0.02em;
 }
 
 .section-title::after {
   content: '';
   display: block;
-  width: 100px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--blue-primary), var(--blue-secondary));
-  margin: 20px auto 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue-primary), #a855f7);
+  margin: 16px auto 0;
   border-radius: 2px;
 }
 
 @media (max-width: 768px) {
   section {
-    padding: 60px 20px;
+    padding: 70px 20px;
   }
   
   .section-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    margin-bottom: 40px;
   }
 }
+
