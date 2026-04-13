@@ -19,7 +19,7 @@ function About() {
           </p>
           <div className="about-stats">
             <div className="stat-item">
-              <span className="stat-number">3+</span>
+              <span className="stat-number">4+</span>
               <span className="stat-label">{t('yearsExperience')}</span>
             </div>
             <div className="stat-item">
@@ -27,7 +27,7 @@ function About() {
               <span className="stat-label">{t('completedProjects')}</span>
             </div>
             <div className="stat-item">
-              <span className="stat-number">20+</span>
+              <span className="stat-number">200+</span>
               <span className="stat-label">{t('connections')}</span>
             </div>
           </div>

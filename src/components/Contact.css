@@ -12,9 +12,12 @@
 }
 
 .contact-subtitle {
-  font-size: 2rem;
+  font-family: 'Syne', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
   margin-bottom: 20px;
   color: var(--blue-primary);
+  letter-spacing: -0.02em;
 }
 
 .contact-description {

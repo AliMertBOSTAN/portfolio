@@ -1,41 +1,44 @@
 .App {
   min-height: 100vh;
-  padding-bottom: 40px; /* Bottom nav için küçültülmüş alan */
+  padding-bottom: 40px;
 }
 
 main {
-  padding-top: 0; /* Header kaldırıldığı için padding yok */
+  padding-top: 0;
 }
 
 section {
-  padding: 80px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 80px clamp(20px, 5vw, 80px);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .section-title {
+  font-family: 'Syne', sans-serif;
   font-size: 2.5rem;
+  font-weight: 700;
   margin-bottom: 50px;
   text-align: center;
   position: relative;
   color: var(--text-primary);
+  letter-spacing: -0.02em;
 }
 
 .section-title::after {
   content: '';
   display: block;
-  width: 100px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--blue-primary), var(--blue-secondary));
-  margin: 20px auto 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue-primary), transparent);
+  margin: 16px auto 0;
   border-radius: 2px;
 }
 
 @media (max-width: 768px) {
   section {
-    padding: 60px 20px;
+    padding: 60px clamp(16px, 4vw, 40px);
   }
-  
+
   .section-title {
     font-size: 2rem;
   }
