@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaFileAlt, FaPenNib, FaCode } from 'react-icons/fa'
+import { FaFileAlt, FaPenNib } from 'react-icons/fa'
 import { useLanguage } from '../contexts/LanguageContext'
 import './About.css'
 
@@ -42,8 +42,15 @@ function About() {
           </div>
         </div>
         <div className="about-image">
-          <div className="image-placeholder">
-            <div className="image-icon"><FaCode style={{ fontSize: '5rem' }} /></div>
+          <div className="photo-frame">
+            <div className="photo-ring photo-ring-1" />
+            <div className="photo-ring photo-ring-2" />
+            <div className="photo-glow" />
+            <img
+              src="/image.png"
+              alt="Ali Mert BOSTAN"
+              className="profile-photo"
+            />
           </div>
         </div>
       </div>
