@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import {
   FaChevronLeft, FaChevronRight,
   FaExternalLinkAlt, FaGithub,
@@ -12,6 +12,9 @@ function Projects() {
   const [active, setActive] = useState(0)
   const [viewMode, setViewMode] = useState('slider') // 'slider' | 'list'
   const touchStartX = useRef(null)
+  const sliderRef = useRef(null)
+  const wheelLockRef = useRef(false)
+  const wheelAccumRef = useRef(0)
 
   const projects = [
     {
@@ -27,7 +30,6 @@ function Projects() {
       accent: '#a855f7',
       gradient: 'linear-gradient(135deg, rgba(88,28,135,0.55), rgba(49,7,95,0.3))',
       orb: 'rgba(168,85,247,0.18)',
-      emoji: '🤖',
       demoLink: '#',
       githubLink: '#',
     },
@@ -44,7 +46,6 @@ function Projects() {
       accent: '#10b981',
       gradient: 'linear-gradient(135deg, rgba(5,78,58,0.55), rgba(2,40,30,0.3))',
       orb: 'rgba(16,185,129,0.18)',
-      emoji: '💹',
       demoLink: '#',
       githubLink: '#',
     },
@@ -61,7 +62,6 @@ function Projects() {
       accent: '#0077ff',
       gradient: 'linear-gradient(135deg, rgba(0,40,100,0.55), rgba(0,12,40,0.3))',
       orb: 'rgba(0,119,255,0.18)',
-      emoji: '🏥',
       demoLink: '#',
       githubLink: '#',
     },
@@ -78,6 +78,44 @@ function Projects() {
     if (Math.abs(dx) > 48) go(dx < 0 ? 1 : -1)
     touchStartX.current = null
   }
+
+  // Trackpad two-finger horizontal swipe → switch cards
+  useEffect(() => {
+    if (viewMode !== 'slider') return
+    const el = sliderRef.current
+    if (!el) return
+
+    const THRESHOLD = 60          // px of accumulated horizontal scroll to trigger
+    const COOLDOWN  = 450         // ms lock after a switch
+    const RESET_MS  = 140         // idle ms before accumulator resets
+    let resetTimer
+
+    const onWheel = (e) => {
+      // only react to dominantly horizontal gestures
+      if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return
+
+      e.preventDefault()
+      if (wheelLockRef.current) return
+
+      wheelAccumRef.current += e.deltaX
+      clearTimeout(resetTimer)
+      resetTimer = setTimeout(() => { wheelAccumRef.current = 0 }, RESET_MS)
+
+      if (Math.abs(wheelAccumRef.current) >= THRESHOLD) {
+        const dir = wheelAccumRef.current > 0 ? 1 : -1
+        go(dir)
+        wheelAccumRef.current = 0
+        wheelLockRef.current = true
+        setTimeout(() => { wheelLockRef.current = false }, COOLDOWN)
+      }
+    }
+
+    el.addEventListener('wheel', onWheel, { passive: false })
+    return () => {
+      el.removeEventListener('wheel', onWheel)
+      clearTimeout(resetTimer)
+    }
+  }, [viewMode, total])
 
   const getPos = (i) => {
     if (i === active) return 'active'
@@ -96,7 +134,6 @@ function Projects() {
           <span className="card-category" style={{ color: p.accent, borderColor: `${p.accent}55` }}>
             {p.category}
           </span>
-          <span className="card-emoji">{p.emoji}</span>
         </div>
         <h3 className="card-title">{p.title}</h3>
         <p className="card-tagline" style={{ color: p.accent }}>{p.tagline}</p>
@@ -147,7 +184,7 @@ function Projects() {
 
       {/* ── SLIDER VIEW ── */}
       {viewMode === 'slider' && (
-        <div className="slider-wrapper" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+        <div className="slider-wrapper" ref={sliderRef} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
           <div className="slider-viewport">
             {projects.map((p, i) => {
               const pos = getPos(i)
@@ -199,9 +236,8 @@ function Projects() {
               {/* Left accent bar */}
               <div className="list-bar" style={{ background: p.accent }} />
 
-              {/* Emoji + category column */}
+              {/* Category column */}
               <div className="list-icon-col">
-                <span className="list-emoji">{p.emoji}</span>
                 <span className="list-category" style={{ color: p.accent, borderColor: `${p.accent}55` }}>
                   {p.category}
                 </span>

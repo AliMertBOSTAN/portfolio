@@ -98,9 +98,6 @@ function Hero() {
       }
     })
 
-    // ── Burst particles (click) ──────────────────────────────
-    const bursts = []
-
     // ── Mouse position (canvas-relative) ────────────────────
     const mouse = { x: -9999, y: -9999 }
 
@@ -124,17 +121,17 @@ function Hero() {
       const r  = hero.getBoundingClientRect()
       const cx = e.clientX - r.left
       const cy = e.clientY - r.top
-      const N  = 14
+      const N  = mobile ? 4 : 6
       for (let i = 0; i < N; i++) {
-        const ang   = (Math.PI * 2 / N) * i + (Math.random() - 0.5) * 0.7
-        const spd   = Math.random() * 3.5 + 1.5
-        bursts.push({
-          x: cx, y: cy,
-          vx: Math.cos(ang) * spd,
-          vy: Math.sin(ang) * spd,
-          r: Math.random() * 2.2 + 1,
-          life: 1.0,
-          decay: 0.020 + Math.random() * 0.012,
+        const bvx = (Math.random() - 0.5) * 0.45
+        const bvy = (Math.random() - 0.5) * 0.45
+        pts.push({
+          x: cx + (Math.random() - 0.5) * 14,
+          y: cy + (Math.random() - 0.5) * 14,
+          vx: bvx, vy: bvy,
+          bvx, bvy,
+          r: Math.random() * 1.6 + 0.4,
+          a: Math.random() * 0.5 + 0.18,
         })
       }
     }
@@ -198,32 +195,6 @@ function Hero() {
         ctx.fillStyle = `rgba(${c},${p.a})`
         ctx.fill()
       })
-
-      // — Burst particles (click trail) —
-      for (let i = bursts.length - 1; i >= 0; i--) {
-        const b = bursts[i]
-        b.life -= b.decay
-        if (b.life <= 0) { bursts.splice(i, 1); continue }
-
-        b.vx *= 0.95
-        b.vy *= 0.95
-        b.x  += b.vx
-        b.y  += b.vy
-
-        const alpha = b.life * 0.9
-
-        // Glow halo
-        ctx.beginPath()
-        ctx.arc(b.x, b.y, b.r * b.life * 3, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(${c},${alpha * 0.1})`
-        ctx.fill()
-
-        // Core
-        ctx.beginPath()
-        ctx.arc(b.x, b.y, b.r * Math.max(0.15, b.life), 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(${c},${alpha})`
-        ctx.fill()
-      }
 
       animId = requestAnimationFrame(draw)
     }
