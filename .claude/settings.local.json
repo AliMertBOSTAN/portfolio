@@ -1,7 +1,17 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(echo \"started, pid=$!\")",
+      "Read(//private/tmp/**)",
+      "Bash(curl -s http://localhost:5174/src/components/ScrollForward.jsx)",
+      "Bash(curl -sI http://localhost:5174/)",
+      "Bash(curl -sI \"http://localhost:5174/node_modules/.vite/deps/animejs.js?v=*\")",
+      "Bash(curl -s http://localhost:5174/)",
+      "Bash(curl -s http://localhost:5174/src/App.jsx)",
+      "Bash(kill 60540)"
     ]
   }
 }
