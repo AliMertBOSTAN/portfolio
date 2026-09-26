@@ -1,14 +1,26 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { Suspense, lazy, useEffect, useRef, useState } from 'react'
 import { FaFileAlt } from 'react-icons/fa'
 import { useLanguage } from '../contexts/LanguageContext'
 import { useTheme } from '../contexts/ThemeContext'
 import './Hero.css'
+
+const HeroChain3D = lazy(() => import('./HeroChain3D'))
+
+const supportsWebGL = () => {
+  try {
+    const c = document.createElement('canvas')
+    return !!(c.getContext('webgl2') || c.getContext('webgl'))
+  } catch {
+    return false
+  }
+}
 
 function Hero() {
   const { t, language } = useLanguage()
   const { theme } = useTheme()
   const canvasRef = useRef(null)
   const heroRef  = useRef(null)
+  const [can3D]  = useState(supportsWebGL)
 
   // ── Typewriter effect ──────────────────────────────────────
   const [displayTitle, setDisplayTitle] = useState('')
@@ -108,12 +120,17 @@ function Hero() {
       mouse.y = e.clientY - r.top
       hero.style.setProperty('--mx', `${mouse.x}px`)
       hero.style.setProperty('--my', `${mouse.y}px`)
+      // Code card tilts toward the cursor
+      hero.style.setProperty('--tilt-x', `${(-(mouse.y / r.height * 2 - 1) * 6).toFixed(2)}deg`)
+      hero.style.setProperty('--tilt-y', `${((mouse.x / r.width * 2 - 1) * 8).toFixed(2)}deg`)
       hero.classList.add('spotlit')
     }
 
     const onLeave = () => {
       mouse.x = -9999
       mouse.y = -9999
+      hero.style.setProperty('--tilt-x', '0deg')
+      hero.style.setProperty('--tilt-y', '0deg')
       hero.classList.remove('spotlit')
     }
 
@@ -236,7 +253,13 @@ function Hero() {
         </div>
         <div className="hero-visual">
           <div className="glowing-circle" />
-          <div className="glowing-ring" />
+          {can3D ? (
+            <Suspense fallback={null}>
+              <HeroChain3D />
+            </Suspense>
+          ) : (
+            <div className="glowing-ring" />
+          )}
           <div className="code-snippet">
             <div className="code-line">
               <span className="code-keyword">const</span>{' '}

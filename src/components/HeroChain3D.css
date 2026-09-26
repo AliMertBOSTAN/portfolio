@@ -1,0 +1,61 @@
+/* ── 3D block chain behind the hero code card ─────────────── */
+.chain3d {
+  position: absolute;
+  inset: -40px -40px 0 -40px;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.chain3d.ready {
+  opacity: 1;
+}
+
+.chain3d canvas {
+  display: block;
+}
+
+.chain3d-tip {
+  position: absolute;
+  pointer-events: none;
+  transform: translate(-50%, calc(-100% - 18px));
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(0, 14, 32, 0.88);
+  border: 1px solid rgba(0, 119, 255, 0.5);
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 0.72rem;
+  line-height: 1.55;
+  color: #94b3d4;
+  white-space: nowrap;
+  text-align: left;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+.chain3d-tip b {
+  color: #e8f1ff;
+  font-weight: 500;
+}
+
+.chain3d-hash {
+  color: #4da3ff;
+}
+
+body.light-theme .chain3d-tip {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(0, 102, 204, 0.35);
+  color: #4a5568;
+  box-shadow: 0 12px 30px rgba(0, 40, 90, 0.15);
+}
+
+body.light-theme .chain3d-tip b {
+  color: #1a1a2e;
+}
+
+body.light-theme .chain3d-hash {
+  color: #0066cc;
+}
+
+[hidden].chain3d-tip {
+  display: none;
+}
