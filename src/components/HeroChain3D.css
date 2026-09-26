@@ -1,7 +1,8 @@
-/* ── 3D block chain in the hero visual ─────────────────────── */
+/* ── 3D block chain — covers the whole hero so minted blocks can fly
+      from the typed title on the left into the ring on the right ── */
 .chain3d {
   position: absolute;
-  inset: -40px;
+  inset: 0;
   z-index: 0;
   opacity: 0;
   transition: opacity 1.2s ease;
@@ -63,4 +64,39 @@ body.light-theme .chain3d-tip b {
 
 body.light-theme .chain3d-hash {
   color: #0066cc;
+}
+
+/* "+ Blok #18211 · Blockchain Developer" — shown when a minted block lands */
+.chain3d-landing {
+  position: absolute;
+  pointer-events: none;
+  transform: translate(-50%, -150%);
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: rgba(0, 119, 255, 0.28);
+  border: 1px solid rgba(77, 163, 255, 0.6);
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1;
+  color: #dff0ff;
+  white-space: nowrap;
+  opacity: 0;
+}
+
+.chain3d-landing.show {
+  animation: chain3d-land 1.9s ease-out forwards;
+}
+
+@keyframes chain3d-land {
+  0%   { opacity: 0; transform: translate(-50%, -110%); }
+  15%  { opacity: 1; transform: translate(-50%, -150%); }
+  75%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -230%); }
+}
+
+body.light-theme .chain3d-landing {
+  background: rgba(0, 102, 204, 0.12);
+  border-color: rgba(0, 102, 204, 0.45);
+  color: #003d82;
 }

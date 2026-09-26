@@ -93,6 +93,12 @@ body.light-theme .hero-spotlight-text {
   width: 100%;
   position: relative;
   z-index: 1;
+  /* Let the pointer reach the 3D canvas underneath; only the text column is interactive */
+  pointer-events: none;
+}
+
+.hero-text {
+  pointer-events: auto;
 }
 
 /* ── Text elements — base transition for spotlight glow ── */
@@ -137,6 +143,22 @@ body.light-theme .hero-spotlight-text {
 }
 
 /* Typewriter cursor */
+/* The finished title glows, then collapses into a block that flies to the chain */
+.typed-text {
+  display: inline-block;
+  transform-origin: 50% 50%;
+}
+
+.typed-text.minting {
+  animation: title-mint 0.55s ease-in forwards;
+}
+
+@keyframes title-mint {
+  0%   { text-shadow: 0 0 0 rgba(77, 163, 255, 0); }
+  35%  { text-shadow: 0 0 18px rgba(77, 163, 255, 0.95); color: var(--text-primary); transform: scale(1.04); }
+  100% { opacity: 0; filter: blur(6px); transform: scale(0.35) translateX(40%); letter-spacing: -0.3em; }
+}
+
 .type-cursor {
   display: inline-block;
   color: var(--blue-primary);

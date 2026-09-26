@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect, useRef, useState } from 'react'
+import React, { Suspense, lazy, useEffect, useMemo, useRef, useState } from 'react'
 import { FaFileAlt } from 'react-icons/fa'
 import { useLanguage } from '../contexts/LanguageContext'
 import { useTheme } from '../contexts/ThemeContext'
@@ -23,10 +23,15 @@ function Hero() {
   const [can3D]  = useState(supportsWebGL)
 
   // ── Typewriter effect ──────────────────────────────────────
+  // Each finished title is handed to the 3D chain as a new block ("minted").
+  // When the chain isn't available, the title is deleted instead.
   const [displayTitle, setDisplayTitle] = useState('')
+  const [minting, setMinting] = useState(false)
+  const typedRef = useRef(null)
+  const mintRef  = useRef(null)
 
-  useEffect(() => {
-    const titles = language === 'tr'
+  const titles = useMemo(() => (
+    language === 'tr'
       ? [
           'Full Stack Developer',
           'Blockchain Developer',
@@ -41,11 +46,19 @@ function Hero() {
           'Smart Contract Expert',
           'Web3 Developer',
         ]
+  ), [language])
 
+  useEffect(() => {
     let titleIdx  = 0
     let charIdx   = 0
     let deleting  = false
+    let cancelled = false
     let timeoutId
+
+    const next = () => {
+      titleIdx = (titleIdx + 1) % titles.length
+      timeoutId = setTimeout(tick, 380)
+    }
 
     const tick = () => {
       const current = titles[titleIdx]
@@ -55,8 +68,27 @@ function Hero() {
         setDisplayTitle(current.slice(0, charIdx))
 
         if (charIdx === current.length) {
-          // Pause at full word, then start deleting
-          timeoutId = setTimeout(() => { deleting = true; tick() }, 1800)
+          // Pause at full word, then mint it into a block (or delete it)
+          timeoutId = setTimeout(() => {
+            const mint   = mintRef.current
+            const landed = mint && typedRef.current
+              ? mint(typedRef.current.getBoundingClientRect(), titleIdx)
+              : null
+
+            if (landed) {
+              setMinting(true)
+              landed.then(() => {
+                if (cancelled) return
+                setDisplayTitle('')
+                setMinting(false)
+                charIdx = 0
+                next()
+              })
+            } else {
+              deleting = true
+              tick()
+            }
+          }, 1400)
         } else {
           timeoutId = setTimeout(tick, 72 + Math.random() * 28)
         }
@@ -65,9 +97,8 @@ function Hero() {
         setDisplayTitle(current.slice(0, charIdx))
 
         if (charIdx === 0) {
-          deleting   = false
-          titleIdx   = (titleIdx + 1) % titles.length
-          timeoutId  = setTimeout(tick, 380)
+          deleting = false
+          next()
         } else {
           timeoutId = setTimeout(tick, 38)
         }
@@ -75,8 +106,12 @@ function Hero() {
     }
 
     timeoutId = setTimeout(tick, 400)
-    return () => clearTimeout(timeoutId)
-  }, [language])
+    return () => {
+      cancelled = true
+      clearTimeout(timeoutId)
+      setMinting(false)
+    }
+  }, [titles])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -227,6 +262,11 @@ function Hero() {
   return (
     <section id="home" className="hero" ref={heroRef}>
       <canvas ref={canvasRef} className="particles-canvas" aria-hidden="true" />
+      {can3D && (
+        <Suspense fallback={null}>
+          <HeroChain3D mintRef={mintRef} titles={titles} />
+        </Suspense>
+      )}
       <div className="hero-spotlight"         aria-hidden="true" />
       <div className="hero-spotlight-text"    aria-hidden="true" />
       <div className="hero-content">
@@ -234,7 +274,7 @@ function Hero() {
           <span className="hero-greeting">{t('greeting')}</span>
           <h1 className="hero-name">Ali Mert BOSTAN</h1>
           <p className="hero-title">
-            <span className="typed-text">{displayTitle}</span>
+            <span className={`typed-text${minting ? ' minting' : ''}`} ref={typedRef}>{displayTitle}</span>
             <span className="type-cursor" aria-hidden="true">|</span>
           </p>
           <p className="hero-description">{t('description')}</p>
@@ -248,13 +288,7 @@ function Hero() {
         </div>
         <div className="hero-visual">
           <div className="glowing-circle" />
-          {can3D ? (
-            <Suspense fallback={null}>
-              <HeroChain3D />
-            </Suspense>
-          ) : (
-            <div className="glowing-ring" />
-          )}
+          {!can3D && <div className="glowing-ring" />}
         </div>
       </div>
     </section>
