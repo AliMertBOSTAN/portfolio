@@ -1,7 +1,7 @@
-/* ── 3D block chain behind the hero code card ─────────────── */
+/* ── 3D block chain in the hero visual ─────────────────────── */
 .chain3d {
   position: absolute;
-  inset: -40px -40px 0 -40px;
+  inset: -40px;
   z-index: 0;
   opacity: 0;
   transition: opacity 1.2s ease;

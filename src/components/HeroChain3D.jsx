@@ -141,12 +141,12 @@ function Chain({ palette, labels, tipRef, pointer, scroll, speed, scatterScale }
     })
   }, [palette, chain])
 
-  // ── Fit the ring to the canvas, sitting above the code card ──
+  // ── Fit the ring to the canvas ─────────────────────────────
   useEffect(() => {
     const halfH = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.position.z
     const halfW = halfH * (size.width / size.height)
-    chain.root.scale.setScalar(Math.min(0.95, halfW / 3.7))
-    chain.root.position.set(0, halfH * 0.36, 0)
+    chain.root.scale.setScalar(Math.min(1.1, halfW / 3.7))
+    chain.root.position.set(0, 0, 0)
   }, [size, camera, chain])
 
   useFrame((_, delta) => {

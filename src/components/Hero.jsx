@@ -120,17 +120,12 @@ function Hero() {
       mouse.y = e.clientY - r.top
       hero.style.setProperty('--mx', `${mouse.x}px`)
       hero.style.setProperty('--my', `${mouse.y}px`)
-      // Code card tilts toward the cursor
-      hero.style.setProperty('--tilt-x', `${(-(mouse.y / r.height * 2 - 1) * 6).toFixed(2)}deg`)
-      hero.style.setProperty('--tilt-y', `${((mouse.x / r.width * 2 - 1) * 8).toFixed(2)}deg`)
       hero.classList.add('spotlit')
     }
 
     const onLeave = () => {
       mouse.x = -9999
       mouse.y = -9999
-      hero.style.setProperty('--tilt-x', '0deg')
-      hero.style.setProperty('--tilt-y', '0deg')
       hero.classList.remove('spotlit')
     }
 
@@ -260,34 +255,6 @@ function Hero() {
           ) : (
             <div className="glowing-ring" />
           )}
-          <div className="code-snippet">
-            <div className="code-line">
-              <span className="code-keyword">const</span>{' '}
-              <span className="code-variable">developer</span> = {'{'}
-            </div>
-            <div className="code-line indent">
-              <span className="code-property">name</span>:{' '}
-              <span className="code-string">'Ali Mert BOSTAN'</span>,
-            </div>
-            <div className="code-line indent">
-              <span className="code-property">skills</span>:{' '}
-              <span className="code-bracket">[</span>
-              <span className="code-string">'React'</span>
-              <span className="code-punct">, </span>
-              <span className="code-string">'Node'</span>
-              <span className="code-punct">, </span>
-              <span className="code-string">'Solidity'</span>
-              <span className="code-punct">, </span>
-              <span className="code-string">'Rust'</span>
-              <span className="code-bracket">]</span>,
-            </div>
-            <div className="code-line indent">
-              <span className="code-property">passion</span>:{' '}
-              <span className="code-string">'Building the Future'</span>
-            </div>
-            <div className="code-line">{'}'}</div>
-            <span className="code-cursor" />
-          </div>
         </div>
       </div>
     </section>
