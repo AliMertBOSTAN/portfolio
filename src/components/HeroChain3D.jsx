@@ -72,7 +72,14 @@ function buildChain() {
       h: 0,
       spin: 0.6 + Math.random() * 0.6,
       phase: Math.random() * Math.PI * 2,
-      baseY: g.position.y,
+      base: g.position.clone(),
+      // Where this block flies when the hero scrolls away: outward and toward the camera
+      scatter: new THREE.Vector3(
+        Math.cos(a) + (Math.random() - 0.5) * 0.6,
+        (Math.random() - 0.5) * 1.2,
+        Math.sin(a) + 0.8,
+      ).normalize().multiplyScalar(5 + Math.random() * 3),
+      tumble: (Math.random() - 0.5) * 6,
       shell, edges, core,
     }
     ring.add(g)
@@ -102,7 +109,7 @@ function buildChain() {
   return { root, tilt, ring, blocks, hits, links, pulses, dispose }
 }
 
-function Chain({ palette, labels, tipRef, pointer, speed }) {
+function Chain({ palette, labels, tipRef, pointer, scroll, speed, scatterScale }) {
   const { camera, size, gl } = useThree()
   const chain     = useMemo(buildChain, [])
   const raycaster = useMemo(() => new THREE.Raycaster(), [])
@@ -112,6 +119,7 @@ function Chain({ palette, labels, tipRef, pointer, speed }) {
   const edgeHot   = useMemo(() => new THREE.Color(palette.edgeHot), [palette])
   const time      = useRef(0)
   const hovered   = useRef(-1)
+  const spread    = useRef(0)
 
   useEffect(() => () => chain.dispose(), [chain])
 
@@ -150,9 +158,15 @@ function Chain({ palette, labels, tipRef, pointer, speed }) {
     p.x = lerp(p.x, p.tx, 0.06)
     p.y = lerp(p.y, p.ty, 0.06)
 
-    // Hover — only while the cursor is actually over the canvas
+    // Scroll dispersion: 0 = chain intact, 1 = blocks scattered and faded out
+    spread.current = lerp(spread.current, scroll.current, 0.08)
+    const s    = spread.current
+    const ease = s * s * (3 - 2 * s)
+    const fade = Math.pow(1 - ease, 2.5)
+
+    // Hover — only while the cursor is actually over the canvas and the chain is intact
     let hit = -1
-    if (p.over) {
+    if (p.over && s < 0.3) {
       const rect = gl.domElement.getBoundingClientRect()
       ndc.set(((p.cx - rect.left) / rect.width) * 2 - 1, -((p.cy - rect.top) / rect.height) * 2 + 1)
       raycaster.setFromCamera(ndc, camera)
@@ -165,7 +179,7 @@ function Chain({ palette, labels, tipRef, pointer, speed }) {
     }
 
     const { tilt, ring, blocks, links, pulses } = chain
-    ring.rotation.y += dt * 0.22 * (hit >= 0 ? 0.2 : 1)
+    ring.rotation.y += dt * (0.22 * (hit >= 0 ? 0.2 : 1) + ease * 0.6)
     tilt.rotation.x = lerp(tilt.rotation.x, 0.32 - p.y * 0.28, 0.05)
     tilt.rotation.y = lerp(tilt.rotation.y, p.x * 0.35, 0.05)
     tilt.rotation.z = lerp(tilt.rotation.z, -p.x * 0.08, 0.05)
@@ -173,12 +187,15 @@ function Chain({ palette, labels, tipRef, pointer, speed }) {
     blocks.forEach((g, i) => {
       const u = g.userData
       u.h = lerp(u.h, i === hit ? 1 : 0, 0.12)
-      g.position.y = u.baseY + Math.sin(t * 1.2 + u.phase) * 0.12
-      g.rotation.x += dt * 0.35 * u.spin
-      g.rotation.y += dt * 0.5 * u.spin
+      g.position.copy(u.base).addScaledVector(u.scatter, ease * scatterScale)
+      g.position.y += Math.sin(t * 1.2 + u.phase) * 0.12
+      g.rotation.x += dt * (0.35 * u.spin + ease * u.tumble)
+      g.rotation.y += dt * (0.5 * u.spin + ease * u.tumble * 0.5)
       g.scale.setScalar(1 + 0.3 * u.h)
       u.edges.material.color.copy(edgeIdle).lerp(edgeHot, u.h)
-      u.shell.material.opacity = palette.shellOpacity + 0.25 * u.h
+      u.edges.material.opacity = 0.85 * fade
+      u.shell.material.opacity = (palette.shellOpacity + 0.25 * u.h) * fade
+      u.core.material.opacity = 0.85 * fade
       u.core.scale.setScalar(1 + u.h * 0.8 + Math.sin(t * 3 + u.phase) * 0.08)
     })
 
@@ -189,6 +206,9 @@ function Chain({ palette, labels, tipRef, pointer, speed }) {
       arr[0] = a.x; arr[1] = a.y; arr[2] = a.z
       arr[3] = b.x; arr[4] = b.y; arr[5] = b.z
       line.geometry.attributes.position.needsUpdate = true
+      // Links snap first, before the blocks themselves fade
+      line.material.opacity = 0.55 * Math.max(0, 1 - ease * 2.5)
+      pulses[i].material.opacity = 0.95 * Math.max(0, 1 - ease * 2.5)
 
       const u = (t * 0.45 + i * 0.21) % 1
       pulses[i].position.lerpVectors(a, b, u)
@@ -222,6 +242,7 @@ function HeroChain3D() {
   const wrapRef = useRef(null)
   const tipRef  = useRef(null)
   const pointer = useRef({ x: 0, y: 0, tx: 0, ty: 0, cx: 0, cy: 0, over: false })
+  const scroll  = useRef(0)
   const [visible, setVisible] = useState(true)
   const [ready, setReady]     = useState(false)
 
@@ -239,6 +260,23 @@ function HeroChain3D() {
     const io = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting))
     io.observe(el)
     return () => io.disconnect()
+  }, [])
+
+  // Scroll progress through the hero: 0 at the top, 1 once 70% of it has scrolled past
+  useEffect(() => {
+    const hero = wrapRef.current?.closest('.hero')
+    if (!hero) return
+    const onScroll = () => {
+      const r = hero.getBoundingClientRect()
+      scroll.current = Math.min(1, Math.max(0, -r.top / (r.height * 0.7)))
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
   }, [])
 
   // Tilt follows the cursor anywhere on the page; hover only counts over the canvas
@@ -281,7 +319,9 @@ function HeroChain3D() {
           labels={labels}
           tipRef={tipRef}
           pointer={pointer}
+          scroll={scroll}
           speed={reduced ? 0.15 : 1}
+          scatterScale={reduced ? 0 : 1}
         />
       </Canvas>
       <div className="chain3d-tip" ref={tipRef} hidden />

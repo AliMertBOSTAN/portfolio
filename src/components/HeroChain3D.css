@@ -5,6 +5,15 @@
   z-index: 0;
   opacity: 0;
   transition: opacity 1.2s ease;
+  /* Soft edges so scattering blocks never hit a hard canvas border */
+  -webkit-mask-image:
+    linear-gradient(to right, transparent, #000 7%, #000 93%, transparent),
+    linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent, #000 7%, #000 93%, transparent),
+    linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent);
+  mask-composite: intersect;
 }
 
 .chain3d.ready {
@@ -54,8 +63,4 @@ body.light-theme .chain3d-tip b {
 
 body.light-theme .chain3d-hash {
   color: #0066cc;
-}
-
-[hidden].chain3d-tip {
-  display: none;
 }
